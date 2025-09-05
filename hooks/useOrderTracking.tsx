@@ -4,11 +4,12 @@ import { useRef, useEffect } from "react";
 import { Order } from "@/lib/orders";
 
 interface UseOrderTrackingProps {
+  onStatusUpdate?: (order: Order) => void;
   onFinalStatus: (order: Order) => void;
   onTimeout: () => void;
 }
 
-export function useOrderTracking({ onFinalStatus, onTimeout }: UseOrderTrackingProps) {
+export function useOrderTracking({ onStatusUpdate, onFinalStatus, onTimeout }: UseOrderTrackingProps) {
   const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const eventSourceRef = useRef<EventSource | null>(null);
@@ -35,6 +36,8 @@ export function useOrderTracking({ onFinalStatus, onTimeout }: UseOrderTrackingP
       finalizedRef.current = true;
       cleanup();
       onFinalStatus(order);
+    } else {
+      onStatusUpdate?.(order);
     }
   };
 
@@ -65,6 +68,7 @@ export function useOrderTracking({ onFinalStatus, onTimeout }: UseOrderTrackingP
               token: data.token,
               note: data.note || "",
               created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString(),
             },
             "webhook"
           );

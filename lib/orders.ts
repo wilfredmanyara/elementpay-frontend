@@ -8,7 +8,7 @@ export interface Order {
   token: string;
   note?: string;
   created_at: string;
+  updated_at: string;
 }
 
-// In-memory storage for orders
 export const orders = new Map<string, Order>();

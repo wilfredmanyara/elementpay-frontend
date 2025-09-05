@@ -16,7 +16,7 @@ const config = getDefaultConfig({
 
 const queryClient = new QueryClient();
 
-function Wallet({ children }: { children: ReactNode }) {
+function Providers({ children }: { children: ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
@@ -26,4 +26,4 @@ function Wallet({ children }: { children: ReactNode }) {
   );
 }
 
-export default Wallet;
+export default Providers;

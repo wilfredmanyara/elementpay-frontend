@@ -33,22 +33,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate order ID
-    const orderId = `ord_0x${Math.random().toString(16).substring(2, 8)}`;
-    // const orderId = "ord_0xabc123";(for testing webhooks)
+    // const orderId = `ord_0x${Math.random().toString(16).substring(2, 8)}`;
+    const orderId = "ord_0xabc123";
     
     const order: Order = {
-      order_id: orderId,
-      // order_id: "ord_0xabc123",(for testing webhooks)
+      // order_id: orderId,
+      order_id: "ord_0xabc123",
       status: 'created',
       amount: body.amount,
       currency: body.currency,
       token: body.token,
       note: body.note || "",
       created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     };
     
-    // Store order
     orders.set(orderId, order);
     
     return NextResponse.json(order, { status: 201 });

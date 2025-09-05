@@ -69,7 +69,6 @@ export default function OrderPage() {
     cleanup();
   };
 
-  // === Conditional Views ===
   if (showReceipt && currentOrder) {
     return <OrderReceipt order={currentOrder} onNewOrder={handleNewOrder} />;
   }
@@ -79,23 +78,23 @@ export default function OrderPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-          Create Order
-        </h1>
+    <div className="main-section mt-16 px-4">
+      <div className="gradient-border max-w-md md:max-w-lg w-full mx-auto">
+        <div className="page-heading">
+          <h1 className="text-2xl md:text-3xl">Create Order</h1>
+        </div>
 
         {!isConnected ? (
-          <div className="text-center">
-            <p className="text-gray-800 mb-4">
+          <div className="text-center flex flex-col items-center space-y-4">
+            <p className="text-dark-200 text-sm md:text-base">
               Connect your wallet to create an order
             </p>
             <ConnectButton />
           </div>
         ) : (
           <>
-            <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-              <p className="text-sm text-gray-800">
+            <div className="gradient-border mb-6">
+              <p className="text-xs md:text-sm text-dark-200 break-all">
                 Connected: <span className="font-mono">{address}</span>
               </p>
             </div>

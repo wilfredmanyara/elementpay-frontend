@@ -6,7 +6,7 @@ interface OrderTimeoutProps {
 
 export default function OrderTimeout({ onRetry }: OrderTimeoutProps) {
   return (
-    <div className="main-section">
+    <div className="main-section mt-20">
       <div className="gradient-border max-w-md w-full text-center">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-badge-yellow mb-6">
           <svg

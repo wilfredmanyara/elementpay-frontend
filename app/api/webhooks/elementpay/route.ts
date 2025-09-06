@@ -11,7 +11,7 @@ interface WebhookPayload {
   };
 }
 
-const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
+const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET!;
 const TEST_MODE = process.env.NODE_ENV === 'development';
 
 if (!WEBHOOK_SECRET) {
@@ -132,7 +132,7 @@ export async function POST(request: NextRequest) {
     let payload: WebhookPayload;
     try {
       payload = JSON.parse(rawBody);
-    } catch (error) {
+    } catch {
       return NextResponse.json(
         { error: 'invalid_payload', message: 'Invalid JSON payload' },
         { status: 400 }

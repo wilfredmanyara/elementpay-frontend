@@ -30,7 +30,7 @@ export function useOrderTracking({ onStatusUpdate, onFinalStatus, onTimeout }: U
     }
   };
 
-  const handleFinalStatus = (order: Order, source: "polling" | "webhook") => {
+  const handleFinalStatus = (order: Order) => {
     if (finalizedRef.current) return;
     if (order.status === "settled" || order.status === "failed") {
       finalizedRef.current = true;
@@ -46,7 +46,7 @@ export function useOrderTracking({ onStatusUpdate, onFinalStatus, onTimeout }: U
       const res = await fetch(`/api/mock/orders/${orderId}`);
       if (res.ok) {
         const order: Order = await res.json();
-        handleFinalStatus(order, "polling");
+        handleFinalStatus(order);
       }
     } catch (err) {
       console.error("Polling error:", err);
@@ -59,19 +59,7 @@ export function useOrderTracking({ onStatusUpdate, onFinalStatus, onTimeout }: U
       try {
         const data = JSON.parse(event.data);
         if (data.type === "webhook" && data.order_id === orderId) {
-          handleFinalStatus(
-            {
-              order_id: orderId,
-              status: data.status,
-              amount: data.amount,
-              currency: data.currency,
-              token: data.token,
-              note: data.note || "",
-              created_at: new Date().toISOString(),
-              updated_at: new Date().toISOString(),
-            },
-            "webhook"
-          );
+          pollOrderStatus(orderId);
         }
       } catch (err) {
         console.error("Webhook error:", err);

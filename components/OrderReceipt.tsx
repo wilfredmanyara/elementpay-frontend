@@ -9,7 +9,7 @@ interface OrderReceiptProps {
 
 export default function OrderReceipt({ order, onNewOrder }: OrderReceiptProps) {
   return (
-    <div className="main-section">
+    <div className="main-section mt-20">
       <div className="gradient-border max-w-md w-full">
         <div className="text-center">
           <div

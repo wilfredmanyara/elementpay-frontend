@@ -21,6 +21,9 @@ export default function OrderPage() {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const { startOrderTracking, cleanup } = useOrderTracking({
+    onStatusUpdate: (order) => {
+      setCurrentOrder(order);
+    },
     onFinalStatus: (order) => {
       setCurrentOrder(order);
       setIsProcessing(false);

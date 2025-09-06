@@ -49,7 +49,7 @@ export default function Navigation() {
         <div className="block lg:hidden">
           <ConnectButton
             showBalance={false}
-            accountStatus="address"
+            accountStatus="avatar"
             chainStatus="none"
           />
         </div>

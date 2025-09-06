@@ -171,7 +171,7 @@ curl -X POST http://localhost:3000/api/webhooks/elementpay \
 
 - HMAC-SHA256 webhook signature verification
 - Constant-time comparison for signatures
-- Timestamp freshness validation (5-minute window)
+- Timestamp freshness validation
 - Raw body verification for webhook payloads
 
 ### Error Handling
@@ -181,27 +181,6 @@ curl -X POST http://localhost:3000/api/webhooks/elementpay \
 - Network error handling in polling
 - Graceful timeout and retry mechanisms
 
-## Project Structure
-
-```
-app/
-├── api/
-│   ├── mock/
-│   │   └── orders/
-│   │       ├── create/route.ts
-│   │       └── [order_id]/route.ts
-│   └── webhooks/
-│       └── elementpay/route.ts
-├── orders/page.tsx
-├── wallet/page.tsx
-├── layout.tsx
-└── page.tsx
-components/
-├── Navigation.tsx
-└── Wallet.tsx
-types/
-└── index.ts
-```
 
 ## Scripts
 

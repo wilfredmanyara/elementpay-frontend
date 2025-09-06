@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Select from "react-select";
+import Select, { StylesConfig, GroupBase } from "react-select";
 
 interface OrderFormProps {
   onSubmit: (formData: OrderRequest) => void;
@@ -69,12 +69,12 @@ export default function OrderForm({ onSubmit, disabled }: OrderFormProps) {
     }
   };
 
-  const customStyles = {
-    container: (provided: any) => ({
+  const customStyles: StylesConfig<OptionType, false, GroupBase<OptionType>> = {
+    container: (provided) => ({
       ...provided,
       width: "100%",
     }),
-    control: (provided: any, state: any) => ({
+    control: (provided) => ({
       ...provided,
       width: "100%",
       padding: "8px",
@@ -92,8 +92,11 @@ export default function OrderForm({ onSubmit, disabled }: OrderFormProps) {
         boxShadow: "0 0 0 3px rgba(59, 130, 246, 0.1)",
       },
     }),
-    option: (provided: any, state: any) => ({
-      ...provided,
+    option: (
+      base,
+      state
+    ) => ({
+      ...base,
       backgroundColor: state.isSelected
         ? "#3b82f6"
         : state.isFocused

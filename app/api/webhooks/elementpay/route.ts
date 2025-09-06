@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createHmac, timingSafeEqual } from 'crypto';
 import { OrderStatus } from '../../../../lib/orders';
-import { notifyWebhookEvent } from '../listen/route';
+import { notifyWebhookEvent } from '@/lib/webhookConnections';
 
 interface WebhookPayload {
   type: string;
